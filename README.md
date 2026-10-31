@@ -62,6 +62,8 @@ Usage information and resources are slightly being added to this repository. Thi
 links so users can decide if they want to use these tools as alternative to the traditional ones that
 are already present.
 
+For an extensive look at the commands list that have been added until now, please see [docs/COMMANDS.md](docs/COMMANDS.md).
+
 ### DBPF containers
 
 | | **The Sims™ 3** | **The Sims™ Medieval** | **The Sims™ 4** |
