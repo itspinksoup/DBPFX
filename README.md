@@ -17,9 +17,10 @@ an intend to engage in demagoguery; nevertheless, it's perfectly reasonable for 
 who might use these libraries to decide for themselves whether they prefer a more experimental alternative or a more traditional one.
 
 As previously stated, parts of the code have been supervised by *Claude Cowork* and *Codex* by *OpenAI*, which has improved on several 
-ways how the syntax and logic was from the original interpretation. However, not a single line of it has been written using "vibe coding"
+ways how the syntax and logic was from the original interpretation. However, not a single line of it has been intentionally written using "vibe coding"
 practices. It can be unstable, dangerous, and extremely complex to maintain if one is not familiar with its methodology and the required 
-programming language understanding.
+programming language understanding. Sometimes when revising code through prompts, AIs take the freedom to change methods or chunks of code when
+"bug cacthing" or optimization.
 
 There's always room for improvement, so there has been occasions where the AI assistance helped organizing handles, names and numerous
 files through the libraries. Best way to check if something has been generated is to check if its syntax enough understandable (as the eyes 
