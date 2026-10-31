@@ -41,6 +41,17 @@ on top for the C# bindings:
   even after the `PackageFile` is disposed.
 * Compressed resources are decoded into pooled buffers (`ArrayPool<byte>`).
 * Untouched resources go from the map to the output byte-for-byte. They are *never* decompressed or re-encoded.
+
+It was measured on a generated 60,000-resource list from a 123 MB package file (`native/tools/bench.cpp`) against
+a conventional reader:
+
+| | DBPFX | conventional reader |
+|---|---|---|
+| Open | 0.03 ms | 7.4 ms |
+| 2,000 key lookups | 7–13 ms | ~290 ms |
+| Read all 306 MB | ~385 ms | ~440 ms |
+
+Reading was limited by `zlib` in both cases.
   
 ## Documentation
 Usage information and resources are slightly being added to this repository. This section will be provided with multiple useful 
