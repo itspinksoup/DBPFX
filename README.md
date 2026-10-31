@@ -173,8 +173,40 @@ each with a decoded sample: what the content looks like (DDS, PNG, XML, FourCC c
 its first bytes, its size range and the package it came from. Add
 them to the TSV (or call `KnownTypes.Register` at run time) and regenerate.
 
+# Requirements
+DBPFX only runs on, and is only built with, current software. Older systems are refused outright
+rather than half-working, so every bug report comes from a recent, supported setup.
+
+Below the minimum DBPFX refuses to work. Between the minimum and the recommended version it works
+normally and reports a notice (`dbpfx-cli` prints it, `.NET` exposes it as `Requirements.Advisory`).
+
+| | Minimum | Recommended | Enforced by |
+|---|---|---|---|
+| **Windows** | Windows 10 22H2 (build 19045), 64-bit | Windows 11 24H2 (build 26100) | native engine at run time, `build.ps1` |
+| **Linux** | glibc 2.35: Ubuntu 22.04, Debian 12, Fedora 36 or newer, x64 (musl and RHEL 9 are not supported) | glibc 2.39: Ubuntu 24.04, Debian 13, Fedora 40, RHEL 10 | native engine at run time and at build time |
+| **macOS** | macOS 14 Sonoma, Apple Silicon or Intel (.NET 10 does not run on anything older) | macOS 15 Sequoia or later | deployment target (the library will not load on older systems) and the native engine |
+| **.NET runtime** | .NET 10; through the .NET Standard 2.1 build also Unity 6 or Mono 6.12 (never .NET Framework) | - | `Requirements` class |
+| **Build: Windows** | Visual Studio 2026 (MSVC 19.50), Windows SDK 10.0.26100. Visual Studio 2026 itself needs Windows 11 or Windows Server 2019+ | - | `build.ps1`, CMake |
+| **Build: Linux / macOS** | GCC 12 or Clang 15 / Xcode 15 (AppleClang 15) | - | CMake |
+| **Build: tools** | CMake 4.0, .NET SDK 10.0.100 (release, not preview), MSBuild 18, Python 3.12 (fixture and table generators) | - | CMake, `global.json`, `Directory.Build.targets`, the scripts |
+
+Windows 10 22H2 works too, but is outside Visual Studio 2026's supported systems so it's not recommended 
+(Windows binaries are the same for Windows 10 and 11).
+
+A Linux library runs on the glibc it was built against and newer, so build the Linux binaries you hand out 
+on Ubuntu 22.04 (or another glibc 2.35 system); built on Ubuntu 24.04 they would need 2.39.
+
+On an older system every C ABI call returns `DBPFX_E_PLATFORM` (-7) with the reason in
+`dbpfx_last_error()`, the C++ API throws `dbpfx::requirements::platform_error`, and .NET throws
+`PlatformNotSupportedException`. `dbpfx-cli version` prints the system it sees and whether it is
+supported and recommended; in .NET, `Requirements.IsSupported`, `Requirements.IsRecommended`,
+`Requirements.UnsupportedReason`, `Requirements.Advisory` and `Requirements.CurrentPlatform` report the
+same, and in C `dbpfx_platform_check()` and `dbpfx_platform_advisory()`. The limits are defined in
+`native/include/dbpfx/requirements.hpp` (run time), the "requirements" block of `native/CMakeLists.txt`
+(build), `managed/src/DBPFX/Requirements.cs` (.NET runtime) and `global.json`; change them together.
+
 ## Building
-On **Windows**: Visual Studio 2022 or newer (or Build Tools for Visual Studio) with the
+On **Windows**: Visual Studio 2026 or newer (or Build Tools for Visual Studio) with the
 "Desktop development with C++" workload, plus the .NET 10 SDK:
 
 ```powershell
