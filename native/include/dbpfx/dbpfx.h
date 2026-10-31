@@ -31,7 +31,7 @@ typedef struct dbpfx_package dbpfx_package;
 typedef struct dbpfx_editor dbpfx_editor;
 
 /* -1 is reserved for "not found" / "rejected" results of the int64_t functions, so errors start at -2. */
-enum { DBPFX_OK = 0, DBPFX_NOT_FOUND = -1, DBPFX_E_ARG = -2, DBPFX_E_IO = -3, DBPFX_E_FORMAT = -4, DBPFX_E_RANGE = -5, DBPFX_E_OTHER = -6 };
+enum { DBPFX_OK = 0, DBPFX_NOT_FOUND = -1, DBPFX_E_ARG = -2, DBPFX_E_IO = -3, DBPFX_E_FORMAT = -4, DBPFX_E_RANGE = -5, DBPFX_E_OTHER = -6, DBPFX_E_PLATFORM = -7 };
 enum { DBPFX_GAME_AUTO = -1, DBPFX_GAME_SIMS3 = 0, DBPFX_GAME_MEDIEVAL = 1, DBPFX_GAME_SIMS4 = 2 };
 enum { DBPFX_POLICY_KEEP = 0, DBPFX_POLICY_ALWAYS = 1, DBPFX_POLICY_NEVER = 2 };
 enum { DBPFX_COMPRESS_NONE = 0x0000, DBPFX_COMPRESS_ZLIB = 0x5A42, DBPFX_COMPRESS_REFPACK = 0xFFFF };
@@ -61,6 +61,12 @@ typedef struct dbpfx_header {
 
 DBPFX_API const char* dbpfx_version(void);
 DBPFX_API const char* dbpfx_last_error(void);
+/* 0 when this operating system meets the minimum (see requirements.hpp), otherwise DBPFX_E_PLATFORM
+ * with the reason in dbpfx_last_error(). Every other call fails the same way on such a system. */
+DBPFX_API int dbpfx_platform_check(void);
+/* "" on a recommended system; otherwise a UTF-8 notice that the system works but is older than
+ * recommended (e.g. Windows 10 instead of Windows 11). Static storage, never NULL. */
+DBPFX_API const char* dbpfx_platform_advisory(void);
 
 /* ---- packages (read-only, memory-mapped, lazy) */
 DBPFX_API int dbpfx_open(const char* path, dbpfx_package** out);

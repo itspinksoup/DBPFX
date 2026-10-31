@@ -9,6 +9,7 @@ ctest --test-dir "$ROOT/build/native" --output-on-failure
 mkdir -p "$ROOT/artifacts/native"
 cp "$ROOT"/build/native/libDBPFX.Native.* "$ROOT/artifacts/native/"
 cp "$ROOT/build/native/dbpfx-cli" "$ROOT/artifacts/native/" || true
+cd "$ROOT"   # global.json (SDK 10.0.100 or newer) is read from the current folder
 if command -v dotnet >/dev/null; then
     dotnet build "$ROOT/managed/DBPFX.slnx" -c "$CONFIG"
     dotnet test "$ROOT/managed/tests/DBPFX.Tests" -c "$CONFIG" --no-build

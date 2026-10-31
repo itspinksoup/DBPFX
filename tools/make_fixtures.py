@@ -9,6 +9,11 @@ used to validate the C++ RefPack *encoder* (see check_package()).
 usage: make_fixtures.py <out-dir> [--big N]
        make_fixtures.py --check <file.package> <manifest.json>
 """
+import sys
+
+if sys.version_info < (3, 12):
+    sys.exit("DBPFX tools require Python 3.12 or newer (this is %d.%d)" % sys.version_info[:2])
+
 import hashlib
 import json
 import os

@@ -10,6 +10,7 @@
 //                       resource types present, with names, and any unknown to the type table
 #include "dbpfx/known_types.hpp"
 #include "dbpfx/package.hpp"
+#include "dbpfx/requirements.hpp"
 
 #include <algorithm>
 #include <cstring>
@@ -243,8 +244,14 @@ int main(int argc, char** argv) {
     try {
         if (argc == 2 && (std::string(argv[1]) == "version" || std::string(argv[1]) == "--version")) {
             std::printf("DBPFX %s\n", DBPFX_VERSION);
+            namespace rq = dbpfx::requirements;
+            std::printf("platform: %s (%s)\n", rq::current_platform().c_str(),
+                        !rq::platform_supported() ? "NOT supported"
+                        : rq::platform_recommended() ? "supported, recommended" : "supported, older than recommended");
             return 0;
         }
+        if (dbpfx::requirements::platform_supported() && !dbpfx::requirements::platform_recommended())
+            std::fprintf(stderr, "note: %s\n", dbpfx::requirements::advisory().c_str());
         if (argc < 3) {
             std::fprintf(stderr,
                          "usage: dbpfx-cli info|list|extract|stbl|repack|verify|types <package> ...  |  dbpfx-cli version\n");
@@ -253,6 +260,10 @@ int main(int argc, char** argv) {
         const std::string cmd = argv[1];
         if (cmd == "version" || cmd == "--version") {
             std::printf("DBPFX %s\n", DBPFX_VERSION);
+            namespace rq = dbpfx::requirements;
+            std::printf("platform: %s (%s)\n", rq::current_platform().c_str(),
+                        !rq::platform_supported() ? "NOT supported"
+                        : rq::platform_recommended() ? "supported, recommended" : "supported, older than recommended");
             return 0;
         }
         if (cmd == "types") return types(argc - 2, argv + 2);

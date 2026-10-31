@@ -6,6 +6,11 @@ usage: python tools/gen_resource_types.py      (run from the repository root)
 Columns: id (hex), games (3M = The Sims 3 + Medieval, 4 = The Sims 4), tag, name, category.
 The same ID can have a different meaning in each game, so rows are per game.
 """
+import sys
+
+if sys.version_info < (3, 12):
+    sys.exit("DBPFX tools require Python 3.12 or newer (this is %d.%d)" % sys.version_info[:2])
+
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

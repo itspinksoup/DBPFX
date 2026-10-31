@@ -1,5 +1,79 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 4.0)
+# macOS 14 is the oldest supported system: binaries refuse to load on anything older.
+# (must be set before project())
+set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0" CACHE STRING "Minimum macOS version" FORCE)
 project(DBPFX VERSION 0.1.0 LANGUAGES C CXX)
+
+# ---------------------------------------------------------------- requirements
+# DBPFX is only built with, and only runs on, current software, so every report comes from a recent,
+# supported setup. The run-time limits live in include/dbpfx/requirements.hpp; keep both in step.
+#   Build:  CMake 4.0, MSVC 19.50 (Visual Studio 2026), GCC 12, Clang 15, AppleClang 15 (Xcode 15),
+#           Windows SDK 10.0.26100
+#   Run:    minimum Windows 10 22H2 (build 19045), Linux with glibc 2.35, macOS 14;
+#           recommended Windows 11, glibc 2.39, macOS 15
+# A Linux library works on the glibc it was built with and newer, so release builds for Linux are
+# made on the minimum (Ubuntu 22.04).
+set(DBPFX_MIN_MSVC 19.50)
+set(DBPFX_MIN_GCC 12)
+set(DBPFX_MIN_CLANG 15)
+set(DBPFX_MIN_APPLECLANG 15)
+set(DBPFX_MIN_WINDOWS_SDK 10.0.26100)
+set(DBPFX_MIN_GLIBC 2.35)
+
+foreach(_lang C CXX)
+    set(_id "${CMAKE_${_lang}_COMPILER_ID}")
+    set(_ver "${CMAKE_${_lang}_COMPILER_VERSION}")
+    if(_id STREQUAL "MSVC")
+        set(_min ${DBPFX_MIN_MSVC})
+        set(_what "MSVC ${DBPFX_MIN_MSVC} (Visual Studio 2026)")
+    elseif(_id STREQUAL "GNU")
+        set(_min ${DBPFX_MIN_GCC})
+        set(_what "GCC ${DBPFX_MIN_GCC}")
+    elseif(_id STREQUAL "AppleClang")
+        set(_min ${DBPFX_MIN_APPLECLANG})
+        set(_what "AppleClang ${DBPFX_MIN_APPLECLANG} (Xcode 15)")
+    elseif(_id STREQUAL "Clang")
+        set(_min ${DBPFX_MIN_CLANG})
+        set(_what "Clang ${DBPFX_MIN_CLANG}")
+    else()
+        message(FATAL_ERROR "Unsupported ${_lang} compiler '${_id}'. Use MSVC, GCC, Clang or AppleClang.")
+    endif()
+    if(_ver VERSION_LESS _min)
+        message(FATAL_ERROR "${_lang} compiler ${_id} ${_ver} is too old: DBPFX requires ${_what} or newer.")
+    endif()
+endforeach()
+
+if(WIN32)
+    if(NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
+        message(FATAL_ERROR "DBPFX is built for 64-bit Windows only.")
+    endif()
+    # Visual Studio generators report the SDK themselves; Ninja/NMake builds get it from vcvars
+    set(_sdk "${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}")
+    if(NOT _sdk)
+        string(REGEX REPLACE "[\\/]+$" "" _sdk "$ENV{WindowsSDKVersion}")
+    endif()
+    if(NOT _sdk)
+        message(FATAL_ERROR "The Windows SDK version is unknown. Build from a Visual Studio developer environment (build.ps1 sets it up).")
+    endif()
+    if(_sdk VERSION_LESS DBPFX_MIN_WINDOWS_SDK)
+        message(FATAL_ERROR "Windows SDK ${_sdk} is too old: DBPFX requires ${DBPFX_MIN_WINDOWS_SDK} or newer.")
+    endif()
+    message(STATUS "Windows SDK ${_sdk}")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    # the native library needs at least the glibc of the machine that builds it
+    execute_process(COMMAND getconf GNU_LIBC_VERSION OUTPUT_VARIABLE _libc OUTPUT_STRIP_TRAILING_WHITESPACE
+                    RESULT_VARIABLE _libc_rc ERROR_QUIET)
+    if(NOT _libc_rc EQUAL 0 OR NOT _libc MATCHES "^glibc ")
+        message(FATAL_ERROR "DBPFX requires glibc ${DBPFX_MIN_GLIBC} or newer (musl and other C libraries are not supported).")
+    endif()
+    string(REPLACE "glibc " "" _libc "${_libc}")
+    if(_libc VERSION_LESS DBPFX_MIN_GLIBC)
+        message(FATAL_ERROR "glibc ${_libc} is too old: DBPFX requires ${DBPFX_MIN_GLIBC} or newer (Ubuntu 22.04, Debian 12, Fedora 36).")
+    endif()
+    message(STATUS "glibc ${_libc}")
+elseif(NOT APPLE)
+    message(FATAL_ERROR "DBPFX supports Windows, Linux and macOS only.")
+endif()
 
 # Pre-release tag appended to the numeric version (empty for a final release).
 # Keep it in sync with <Version> in managed/Directory.Build.props.
@@ -78,7 +152,8 @@ endif()
 add_library(dbpfx_core STATIC
     src/mapped_file.cpp
     src/compression.cpp
-    src/package.cpp)
+    src/package.cpp
+    src/requirements.cpp)
 target_include_directories(dbpfx_core PUBLIC include)
 # single source of truth for the version reported by dbpfx_version() and dbpfx-cli
 target_compile_definitions(dbpfx_core PUBLIC DBPFX_VERSION="${DBPFX_VERSION_STRING}")

@@ -1,4 +1,5 @@
 #include "dbpfx/package.hpp"
+#include "dbpfx/requirements.hpp"
 
 #include <cstdio>
 #include <fstream>
@@ -124,6 +125,7 @@ std::shared_ptr<package::state> finish(std::shared_ptr<package::state> st) {
 }  // namespace
 
 package package::open(const std::filesystem::path& path) {
+    requirements::require_supported_platform();
     auto st = std::make_shared<state>();
     st->storage = mapped_file(path);
     st->path = path;
@@ -132,6 +134,7 @@ package package::open(const std::filesystem::path& path) {
 }
 
 package package::from_memory(byte_vec bytes) {
+    requirements::require_supported_platform();
     auto st = std::make_shared<state>();
     st->storage = std::move(bytes);
     const auto& v = std::get<byte_vec>(st->storage);
@@ -237,7 +240,7 @@ blob package::read(std::size_t i) const {
 }
 
 // ============================================================================ editor
-package_editor::package_editor(game g) : game_(g) {}
+package_editor::package_editor(game g) : game_(g) { requirements::require_supported_platform(); }
 
 package_editor::package_editor(package base, std::optional<game> g) : base_(std::move(base)) {
     game_ = g.value_or(base_.detected_game());

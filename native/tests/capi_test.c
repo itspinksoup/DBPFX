@@ -10,6 +10,11 @@ static int fails = 0;
 
 int main(int argc, char** argv) {
     printf("%s\n", dbpfx_version());
+    if (dbpfx_platform_check() != 0) {
+        printf("unsupported platform: %s\n", dbpfx_last_error());
+        return 1;
+    }
+    CHECK(dbpfx_platform_advisory() != NULL);
 
     /* build a package in memory through the editor */
     dbpfx_editor* ed = NULL;

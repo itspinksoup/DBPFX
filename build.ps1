@@ -7,6 +7,7 @@
 # Visual Studio is located with vswhere and its x64 compiler environment is loaded, so this works
 # from any PowerShell window (no "Developer PowerShell" needed). Visual Studio's own CMake and Ninja
 # are preferred over whatever is on PATH, so an older standalone CMake cannot get in the way.
+#Requires -Version 5.1
 [CmdletBinding()]
 param(
     [ValidateSet("Release", "Debug")] [string] $Config = "Release",
@@ -21,7 +22,8 @@ $artifacts = Join-Path $root "artifacts\native"
 function Find-VisualStudio {
     $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
     if (-not (Test-Path $vswhere)) { return $null }
-    $found = & $vswhere -latest -prerelease -products * `
+    # Visual Studio 2026 (version 18) or newer
+    $found = & $vswhere -latest -prerelease -products * -version "[18.0,)" `
         -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
     if ($found) { return @($found)[0] }
     return $null
@@ -46,11 +48,25 @@ function Resolve-Tool([string] $bundled, [string] $name) {
     return $null
 }
 
+# ------------------------------------------------------------------ requirements
+# DBPFX is only built and tested on current software (see "Requirements" in README.md):
+# Windows 10 22H2 or newer (Windows 11 recommended), Visual Studio 2026, Windows SDK 10.0.26100,
+# CMake 4.0, .NET 10 SDK.
+$os = [Environment]::OSVersion.Version
+if ($os.Major -lt 10 -or ($os.Major -eq 10 -and $os.Build -lt 19045)) {
+    throw "DBPFX requires Windows 10 22H2 (build 19045) or newer; this system is build $($os.Build)."
+}
+if ($os.Major -eq 10 -and $os.Build -lt 22000) {
+    Write-Warning ("Windows 10 can run DBPFX, but Windows 11 is recommended. Visual Studio 2026, which builds " +
+                   "DBPFX, officially supports only Windows 11 and Windows Server 2019 or newer.")
+}
+if (-not [Environment]::Is64BitOperatingSystem) { throw "DBPFX requires 64-bit Windows." }
+
 # ------------------------------------------------------------------ toolchain
 $vs = Find-VisualStudio
 if (-not $vs) {
     throw @"
-No Visual Studio with the C++ compiler was found.
+No Visual Studio 2026 (version 18) or newer with the C++ compiler was found.
 Install "Desktop development with C++" in the Visual Studio Installer (or the free
 "Build Tools for Visual Studio" with that workload), then run this script again.
 "@
@@ -130,13 +146,21 @@ Remove-Item Env:Platform -ErrorAction SilentlyContinue
 $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
 if (-not $dotnet) { throw "dotnet not found. Install the .NET 10 SDK." }
 $sdks = & dotnet --list-sdks
-if (-not ($sdks | Where-Object { $_ -match '^(1[0-9]|[2-9][0-9])\.' })) {
-    throw "The .NET 10 SDK (or newer) is required. Installed SDKs:`n$($sdks -join "`n")"
+# release SDKs only ("10.0.100 [path]"); previews carry a suffix such as "11.0.100-preview.1"
+$modern = $sdks | Where-Object { $_ -match '^(\d+)\.\d+\.\d+(\S*)\s' -and [int]$Matches[1] -ge 10 -and $Matches[2] -eq '' }
+if (-not $modern) {
+    throw "The .NET 10 SDK (10.0.100 or newer, release build) is required. Installed SDKs:`n$($sdks -join "`n")"
 }
-& dotnet build (Join-Path $root "managed\DBPFX.slnx") -c $Config "-p:Platform=Any CPU"
-if ($LASTEXITCODE) { throw "dotnet build failed" }
-if (-not $SkipTests) {
-    & dotnet test (Join-Path $root "managed\tests\DBPFX.Tests") -c $Config --no-build
-    if ($LASTEXITCODE) { throw "managed tests failed" }
+# global.json (SDK 10.0.100 or newer) is picked up from the current folder, so run from the root
+Push-Location $root
+try {
+    & dotnet build (Join-Path $root "managed\DBPFX.slnx") -c $Config "-p:Platform=Any CPU"
+    if ($LASTEXITCODE) { throw "dotnet build failed" }
+    if (-not $SkipTests) {
+        & dotnet test (Join-Path $root "managed\tests\DBPFX.Tests") -c $Config --no-build
+        if ($LASTEXITCODE) { throw "managed tests failed" }
+    }
+} finally {
+    Pop-Location
 }
 Write-Host "done. Native engine: $artifacts\DBPFX.Native.dll" -ForegroundColor Green

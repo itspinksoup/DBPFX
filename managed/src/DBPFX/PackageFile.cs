@@ -32,10 +32,12 @@ namespace DBPFX
         // ================================================================== opening
         /// <summary>Map a package file. Other programs may keep it open; it is never written through.</summary>
         /// <exception cref="FileNotFoundException"/>
+        /// <exception cref="PlatformNotSupportedException">The system is older than <see cref="Requirements"/> allows.</exception>
         /// <exception cref="InvalidDataException">Not a DBPF 2.x package, or its index is damaged.</exception>
         public static PackageFile Open(string path)
         {
             if (path == null) throw new ArgumentNullException(nameof(path));
+            Requirements.EnsureSupported();
             string full = System.IO.Path.GetFullPath(path);
             byte[] utf8 = Utf8Z(full);
             fixed (byte* p = utf8)
@@ -53,6 +55,7 @@ namespace DBPFX
         /// <summary>Open a package held in memory. The bytes are copied once into native memory.</summary>
         public static PackageFile Load(ReadOnlySpan<byte> bytes)
         {
+            Requirements.EnsureSupported();
             fixed (byte* p = bytes)
             {
                 int status = dbpfx_open_memory(p, (ulong)bytes.Length, out PackageHandle handle);

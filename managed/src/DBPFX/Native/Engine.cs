@@ -16,7 +16,7 @@ namespace DBPFX.Native
     {
         internal const string Library = "DBPFX.Native";
 
-        internal const int NotFound = -1, ErrArgument = -2, ErrIo = -3, ErrFormat = -4, ErrRange = -5;
+        internal const int NotFound = -1, ErrArgument = -2, ErrIo = -3, ErrFormat = -4, ErrRange = -5, ErrPlatform = -7;
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct HeaderData
@@ -28,6 +28,8 @@ namespace DBPFX.Native
         // ------------------------------------------------------------------ packages
         [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] internal static extern IntPtr dbpfx_version();
         [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] internal static extern IntPtr dbpfx_last_error();
+        [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] internal static extern int dbpfx_platform_check();
+        [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] internal static extern IntPtr dbpfx_platform_advisory();
         [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] internal static extern int dbpfx_open(byte* path, out PackageHandle package);
         [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] internal static extern int dbpfx_open_memory(byte* data, ulong length, out PackageHandle package);
         [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] internal static extern void dbpfx_close(IntPtr package);
@@ -104,6 +106,7 @@ namespace DBPFX.Native
                 case ErrArgument: return new ArgumentException(message);
                 case ErrRange: return new ArgumentOutOfRangeException(null, message);
                 case ErrFormat: return new InvalidDataException(message);
+                case ErrPlatform: return new PlatformNotSupportedException(message);
                 case ErrIo:
                     if (Contains(message, "No such file") || Contains(message, "error 2)") || Contains(message, "error 3)"))
                         return new FileNotFoundException(message);

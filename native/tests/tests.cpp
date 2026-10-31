@@ -2,6 +2,7 @@
 // usage: dbpfx-tests [fixture-dir]
 #include "dbpfx/known_types.hpp"
 #include "dbpfx/package.hpp"
+#include "dbpfx/requirements.hpp"
 
 #include <array>
 #include <cstdio>
@@ -459,8 +460,24 @@ static void test_known_types() {
     CHECK(all.size() > 400);
 }
 
+static void test_requirements() {
+    namespace rq = dbpfx::requirements;
+    std::printf("platform: %s\n", rq::current_platform().c_str());
+    CHECK(rq::platform_supported());
+    CHECK(rq::unsupported_reason().empty());
+    if (!rq::platform_recommended()) std::printf("note: %s\n", rq::advisory().c_str());
+    bool threw = false;
+    try {
+        rq::require_supported_platform();
+    } catch (const rq::platform_error&) {
+        threw = true;
+    }
+    CHECK(!threw);
+}
+
 int main(int argc, char** argv) {
     std::setvbuf(stdout, nullptr, _IONBF, 0);
+    test_requirements();
     test_known_types();
     test_refpack();
     test_zlib();

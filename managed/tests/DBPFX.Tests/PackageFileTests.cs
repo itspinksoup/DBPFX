@@ -127,6 +127,16 @@ namespace DBPFX.Tests
         }
 
         [Fact]
+        public void RunsOnASupportedPlatform()
+        {
+            Assert.True(Requirements.IsSupported, Requirements.UnsupportedReason);
+            Assert.Null(Requirements.UnsupportedReason);
+            Requirements.EnsureSupported();
+            Assert.Contains(".NET", Requirements.CurrentPlatform);
+            Assert.Equal(Requirements.Advisory == null, Requirements.IsRecommended);
+        }
+
+        [Fact]
         public void KnownTypeTable()
         {
             Assert.True(DBPFX.KnownTypes.TryGet(DBPFX.KnownTypes.StringTable, Game.Sims3, out var ts3));

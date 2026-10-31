@@ -16,6 +16,7 @@ namespace DBPFX
         /// </summary>
         public static void Decompress(ReadOnlySpan<byte> source, Span<byte> destination)
         {
+            Requirements.EnsureSupported();
             fixed (byte* s = source)
             fixed (byte* d = destination)
                 Check(dbpfx_decompress(s, (ulong)source.Length, d, (ulong)destination.Length));
@@ -29,6 +30,7 @@ namespace DBPFX
         {
             if (method != CompressionMethod.RefPack && method != CompressionMethod.Zlib)
                 throw new ArgumentException("Only RefPack and Zlib can be written", nameof(method));
+            Requirements.EnsureSupported();
             fixed (byte* s = source)
             {
                 if (Check(dbpfx_compress((int)method, s, (ulong)source.Length, out IntPtr output, out ulong length)) == 0)

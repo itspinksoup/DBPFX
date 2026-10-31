@@ -12,6 +12,14 @@
     <DbpfxIdentityLibrary>$(DbpfxNativeDir)DBPFX.Identity.dll</DbpfxIdentityLibrary>
   </PropertyGroup>
 
+  <!-- Requirements: only current toolchains build DBPFX (.NET 10 SDK = MSBuild 18). -->
+  <Target Name="DbpfxCheckToolchain" BeforeTargets="Build">
+    <Error Condition="'$(NETCoreSdkVersion)' != '' and $([MSBuild]::VersionLessThan('$(NETCoreSdkVersion)', '10.0.100'))"
+           Text="DBPFX requires the .NET 10 SDK (10.0.100) or newer; this build uses $(NETCoreSdkVersion)." />
+    <Error Condition="$([MSBuild]::VersionLessThan('$(MSBuildVersion)', '18.0'))"
+           Text="DBPFX requires MSBuild 18 (Visual Studio 2026 or the .NET 10 SDK) or newer; this is MSBuild $(MSBuildVersion)." />
+  </Target>
+
   <Target Name="DbpfxCheckChannel" BeforeTargets="Build" Condition="'$(DbpfxChannel)' == ''">
     <Error Text="Unknown pre-release tag in version '$(Version)': use X.X.X-canary, X.X.X-dev, X.X.X-beta or X.X.X." />
   </Target>

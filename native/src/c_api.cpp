@@ -2,6 +2,7 @@
 #include "dbpfx/dbpfx.h"
 
 #include "dbpfx/package.hpp"
+#include "dbpfx/requirements.hpp"
 
 #include <cstdlib>
 #include <filesystem>
@@ -24,7 +25,12 @@ template <class F>
 int guard(F&& f) {
     try {
         g_error.clear();
+        // every entry point refuses to work on an operating system older than the minimum
+        dbpfx::requirements::require_supported_platform();
         return f();
+    } catch (const dbpfx::requirements::platform_error& e) {
+        g_error = e.what();
+        return DBPFX_E_PLATFORM;
     } catch (const dbpfx::format_error& e) {
         g_error = e.what();
         return DBPFX_E_FORMAT;
@@ -99,6 +105,18 @@ extern "C" {
 #endif
 const char* dbpfx_version(void) { return "DBPFX " DBPFX_VERSION; }
 const char* dbpfx_last_error(void) { return g_error.c_str(); }
+
+int dbpfx_platform_check(void) {
+    return guard([] { return DBPFX_OK; });
+}
+
+const char* dbpfx_platform_advisory(void) {
+    try {
+        return dbpfx::requirements::advisory().c_str();
+    } catch (...) {
+        return "";
+    }
+}
 
 // ---------------------------------------------------------------- packages
 int dbpfx_open(const char* path, dbpfx_package** out) {
