@@ -43,9 +43,9 @@ on top for the C# bindings:
 * Untouched resources go from the map to the output byte-for-byte. They are *never* decompressed or re-encoded.
 
 It was measured on a generated 60,000-resource list from a 123 MB package file (`native/tools/bench.cpp`) against
-a conventional reader:
+the conventional readers like **s3pi** and **s4pi**:
 
-| | DBPFX | conventional reader |
+| | DBPFX | s3pi/s4pi |
 |---|---|---|
 | Open | 0.03 ms | 7.4 ms |
 | 2,000 key lookups | 7–13 ms | ~290 ms |
