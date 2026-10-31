@@ -2,8 +2,8 @@
 A modern implementation of the DBPF Package libs from **The Sims™ 3**, **The Sims™ Medieval** and **The Sims™ 4**.
 Planned support for legacy games and compatible console titles might arrive in the future.
 
-It reads and writes the packages of all three games and converts resource data between them. It has been produced
-with artificial intelligence asistance from multiple LLMs like *Claude Cowork* and *Codex* by *OpenAI*.
+It's a brand new engine that reads and writes the packages of all three games and converts resource data between them.
+It has been produced with artificial intelligence asistance from multiple LLMs like *Claude Cowork* and *Codex* by *OpenAI*.
 
 This project isn't affiliated with/endorsed by The Sims™, Maxis or Electronic Arts™. Trademarks are property of their respective owners.
 
@@ -146,6 +146,33 @@ New resource formats are added by declaring them in the grammar; see [docs/GRAMM
 The `dbpfx-cli` tool (`info`, `list`, `extract`, `stbl`, `repack`, `verify`, `types`, `version`) is built
 within the libraries.
 
+#### Resource types
+
+`data/resource-types.tsv` is the single list of known resource types. 486 entries over 446 IDs:
+
+* 220 for The Sims™ 3 and The Sims™ Medieval.
+* 266 for The Sims™ 4 + 83 XML tuning types.
+
+It was compiled from the community's public format documentation and then checked against every package the base games ship: the
+14 types no documentation covers were identified from their contents and are marked "Inferred from content". Rows are per game 
+because some IDs mean different things in each game (`0x0333406C` is XML in The Sims 3 and a font configuration in The Sims 4).
+`tools/gen_resource_types.py` turns it into the C# table (`KnownTypes`) and the C++ table
+(`known_types.hpp`). Missing data can be added any time in the future.
+
+Type names are informational for the user. Reading, writing and converting work for every resource whatever its
+type, because the engine never needs to know a type to handle its bytes.
+
+To find types the table does not document yet, run `types` over real game files:
+
+```powershell
+.\artifacts\native\dbpfx-cli.exe types (Get-ChildItem "C:\Games\The Sims 3\GameData" -Recurse -Filter *.package).FullName
+```
+
+It prints every type present with its count and name, and lists the unknown IDs at the end,
+each with a decoded sample: what the content looks like (DDS, PNG, XML, FourCC chunk names, ...),
+its first bytes, its size range and the package it came from. Add
+them to the TSV (or call `KnownTypes.Register` at run time) and regenerate.
+
 ## Building
 On **Windows**: Visual Studio 2022 or newer (or Build Tools for Visual Studio) with the
 "Desktop development with C++" workload, plus the .NET 10 SDK:
@@ -155,10 +182,10 @@ On **Windows**: Visual Studio 2022 or newer (or Build Tools for Visual Studio) w
 .\build.ps1 -Clean   # start the native build from scratch
 ```
 
-The script finds Visual Studio itself (through `vswhere`), loads its x64 compiler environment and uses
-its bundled CMake and Ninja, so it runs from any PowerShell window. zlib is downloaded and built
-automatically (no git needed). The native DLL goes to `artifacts\native\` and is copied next to
-`DBPFX.dll` in every project that references it. On .NET 10 the library also finds it under
+The script finds Visual Studio itself through `vswhere`, loads its x64 compiler environment and uses
+its bundled CMake and Ninja, so it runs from any PowerShell window. `zlib` is downloaded and built
+automatically so there's no need to download `git`. The native DLL goes to `artifacts\native\` and is
+copied next to `DBPFX.dll` in every project that references it. On .NET 10 the library also finds it under
 `runtimes\<rid>\native\` (NuGet layout).
 
 On **Linux** & **macOS**: `./build.sh`. Requires `zlib` development headers to compile.
