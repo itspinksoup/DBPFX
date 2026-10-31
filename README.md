@@ -26,7 +26,7 @@ programming language understanding. Sometimes when revising code through prompts
 
 There's always room for improvement, so there has been occasions where the AI assistance helped organizing handles, names and numerous
 files through the libraries. Best way to check if something has been generated is to check if its syntax enough understandable (as the eyes 
-from who supervises this project *cough cough*). 
+from who made this project can tell *cough cough*). 
 
 You can make formal requests to change so it will be addressed and fixed on newer builds. Or you can pull a request by yourself.
 
