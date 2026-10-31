@@ -1,0 +1,490 @@
+# DBPFX resource type table - single source for the C# and C++ tables (tools/gen_resource_types.py)
+# games: 3M = The Sims 3 + Medieval, 4 = The Sims 4. The same ID may mean different things per game.
+# category 'Inferred from content': not publicly documented; named from what the data looks like in the game files.
+# id	games	tag	name	category
+0069453E	4	XML	Objective tuning	Tuning
+00AE6C67	3M	BONE	Skeleton connection data	
+00B2D882	3M	_IMG	DDS image	
+00B2D882	4		DST image	Texture
+00B552EA	3M	_SPT	SpeedTree resource	
+010FAF71	4		Age/gender map	Other
+0119B36D	4		Queryable world mask	World
+015A1849	3M	GEOM	Body geometry	
+015A1849	4		Geometry	Create-A-Sim
+0166038C	3M	NMAP	Name map	
+0166038C	4		Name map	Other
+01661233	3M	MODL	Object model	
+01661233	4		Model	Build
+01942E2C	4		Lot description	World
+01A527DB	3M	_AUD	Audio (voice)	
+01A527DB	4		Audio vocals	Audio
+01D0E6FB	3M	VBUF	Vertex buffer	
+01D0E70F	3M	IBUF	Index buffer	
+01D0E723	3M	VRTF	Vertex format	
+01D0E75D	3M	MATD	Material definition	
+01D0E75D	4		Material definition	Build
+01D0E76B	3M	SKIN	Skin	
+01D10F34	3M	MLOD	Object model levels of detail	
+01D10F34	4		Model LOD	Build
+01EEF63A	3M	_AUD	Audio (sound effects and music)	
+01EEF63A	4		Audio effects	Audio
+02019972	3M	MTST	Material set	
+02019972	4		Material set	Other
+021D7E8C	3M	SPT2	SpeedTree data	
+0229684B	3M	VBUF	Vertex buffer	
+0229684F	3M	IBUF	Index buffer	
+022B756C	3M		World description name hash	
+025C90A6	3M	_CSS	CSS stylesheet	
+025C95B6	3M	LAYO	UI layout	
+025ED6F4	3M	SIMO	Sim outfit	
+025ED6F4	4		Sim info	Other
+029E333B	3M	VOCE	Voice controllers	
+02C9EFF2	3M	MIXR	Audio submix	
+02D5DF13	3M	JAZZ	Animation state machine	
+02D5DF13	4		Animation state machine	Animation
+02DC343F	3M	OBJK	Object key	
+033260E3	3M	TKMK	Animation track mask	
+033260E3	4		Track mask	Animation
+0333406C	3M	_XML	XML resource	
+0333406C	4		Font configuration	UI
+033A1435	3M	TXTC	Texture compositor	
+033B2B66	3M		Unknown	
+033B2B66	4		Terrain KD tree	World
+0341ACC9	3M	TXTF	Fabric compositor	
+034AEECB	3M	CASP	CAS part	
+034AEECB	4		CAS part	Create-A-Sim
+0354796A	3M	TONE	Skin tone	
+0354796A	4		Skin tone	Create-A-Sim
+03555BA8	3M	TONE	Hair tone	
+0355E0A6	3M	BOND	Bone delta (slot adjustments)	
+0355E0A6	4		Bone pose	Animation
+0358B08A	3M	FACE	Face blend	
+03666059	4	XML	Maxis lot tuning	Tuning
+03B33DDF	3M	ITUN	Interaction tuning	
+03B33DDF	4	XML	Tuning (generic)	Tuning
+03B4C61D	3M	LITE	Lighting	
+03B4C61D	4		Light	Other
+03D843C2	3M	CCHE	Compositor cache entry	
+03D86EA4	3M	DETL	World lot information	
+03E80CDC	3M		Neighbourhood name	
+03E9D964	4	XML	Pie menu category tuning	Tuning
+0418FE2A	3M	CFEN	Catalog fence	
+0418FE2A	4		Fence	Build
+044735DD	3M		Unknown	
+044AE110	3M	COMP	Complate preset	
+046A7235	3M		Lot location data	
+048A166D	3M	UNKN	Unknown	
+0498DA7E	3M		Global lot ID	
+049CA4CD	3M	CSTR	Catalog stairs	
+04A09283	3M	UNKN	Lot stair location details	
+04A4D951	3M	WDET	World detail	
+04AC5D93	3M	CPRX	Catalog proxy product	
+04B30669	3M	CTTL	Catalog terrain geometry brush	
+04C58103	3M	CRAL	Catalog railing	
+04D2B465	4	XML	Achievement collection tuning	Tuning
+04D82D90	3M	CMRU	Compositor cache MRU	
+04ED4BB2	3M	CTPT	Catalog terrain paint brush	
+04EE6ABB	3M	UNKN	Lot terrain texture list	
+04F3CC01	3M	CFIR	Catalog fireplace	
+04F51033	3M	SBNO	Binary outfit	
+04F66BCC	3M	UNKN	Fireplace and chimney groups	
+04F88964	3M	SIME	Townie data	
+051DF2DD	3M	CBLN	Face piece preset	
+053A3E7B	4		Locomotion builder	Animation
+05512255	3M	UNKN	Room index	
+0553EAD4	3M	UNKN	Unknown	
+0563919E	3M	UNKN	Lot wall and floor compositor	
+0580A2B4	3M	THUM	Thumbnail	
+0580A2B5	3M	THUM	Thumbnail	
+0580A2B6	3M	THUM	Thumbnail	
+0580A2CD	3M	SNAP	Sim snapshot (small)	
+0580A2CE	3M	SNAP	Sim snapshot (small)	
+0580A2CF	3M	SNAP	Sim snapshot (large)	
+0589DC44	3M	THUM	Thumbnail	
+0589DC45	3M	THUM	Thumbnail	
+0589DC46	3M	THUM	Thumbnail	
+0589DC47	3M	THUM	Thumbnail	
+0591B1AF	3M	UPST	User CAS preset	
+05B17698	3M	THUM	Thumbnail	
+05B17699	3M	THUM	Thumbnail	
+05B1769A	3M	THUM	Thumbnail	
+05B1B524	3M	THUM	Thumbnail	
+05B1B525	3M	THUM	Thumbnail	
+05B1B526	3M	THUM	Thumbnail	
+05CD4BB3	3M		World routing	
+05DA8AF6	3M	WBND	World boundaries	
+05E4FAF7	3M	UNKN	Unknown	
+05ED1226	3M	REFS	Reference store	
+05FF3549	3M	UNKN	Unknown	
+05FF6BA4	3M	2ARY	Lot elevation detail	
+0604ABDA	3M	DMTR	Dream tree	
+060B390C	3M	CWAT	Catalog terrain water brush	
+060E1826	3M	UNKN	Unknown	
+0611B0E7	3M	UNKN	Unknown	
+062853A8	3M	FAMD	Family data	
+062C8204	3M	BBLN	Clothing part blend	
+062E9EE0	3M		Unknown	
+06302271	3M	CINF	Colour information	
+063261DA	3M	HINF	Hair information	
+06326213	3M	OBCI	Object colour	
+06393F5D	3M	UNKN	Unknown	
+065B8B38	3M	UNKN	Unknown	
+065BFCAC	3M		Unknown	
+065BFCAD	3M		Unknown	
+065BFCAE	3M		Unknown	
+0668F628	3M		World description details	
+0668F630	3M		World description lot count	
+0668F635	3M	TWNI	World description image	
+0668F639	3M	TWNP	World description image path	
+0679B9B8	3M		Lot data: 2-byte flag	Inferred from content
+067CAA11	3M	BGEO	Blend geometry	
+067CAA11	4		Blend geometry	Other
+06AC244F	4		Timeline events	Other
+06B981ED	3M	OBJS	Script state dump	
+06CE4804	3M	META	Metadata	
+06D6B112	3M	UNKN	Unknown	
+06DC847E	3M	UNKN	Lot terrain paint	
+07046B39	3M		Installed Sims index	
+073FAA07	3M	S3SA	Script assembly	
+074DFB83	4	XML	Relationship bit tuning	Tuning
+07576A17	4		Model cutout	Other
+07936CE0	4		Block	Build
+07CD07EC	3M		Front door reference	
+089132E8	3M		Lot data: 16-bit value table	Inferred from content
+08BF4D18	3M		World grid map (2048 x 2048)	Inferred from content
+092E36EA	3M		Lot data: 16-bit value list	Inferred from content
+0976AA5D	3M		Empty marker resource	Inferred from content
+0A0CE7A9	3M		Lot data (binary, version 1)	Inferred from content
+0A227BCF	4		World off-lot mesh reference	World
+0A29D05F	3M		Lot data: 4-byte value	Inferred from content
+0A36F07A	3M	CCFP	Catalog curved pool	
+0A388C4F	3M		Lot data: coordinates (floats)	Inferred from content
+0C07456D	3M	COLL	Collection	
+0C244B35	3M		ROOT-block data (DeltaBuild)	Inferred from content
+0C37A5B5	3M	LOOK	CAS look-up table	
+0C772E27	4	XML	Action tuning	Tuning
+0CA4C78B	4	XML	Sim template tuning	Tuning
+0D338A3A	4		Lot preview thumbnail	World
+0E4D15FB	4	XML	Role state tuning	Tuning
+0EEB823A	4	XML	Renderer fade tuning	Tuning
+0F3F5476	3M		Lot data: 16-bit value table	Inferred from content
+105205BA	4		Sim preset	Create-A-Sim
+11E32896	3M		Roof definitions	
+122FC66A	4		Lot type event map	Other
+12496650	4	XML	Camera tuning	Tuning
+12952634	4		World lot architecture	World
+13CF0ED2	4		Deco trim	Build
+1427C109	4		Terrain tool	Build
+153D2219	4		World water manifest	World
+16B17A6C	3M		Thumbnail expiration	
+16CA6BC4	4		Thumbnail extra 1	Other
+1709627D	4		Water manifest	World
+17C0C281	4		World data (unknown 2)	World
+18F3C673	4		World lights info	World
+19301120	4		World timeline colour	World
+1A8506C5	4		Modal music mapping	Other
+1B192049	4		Visual effects	Other
+1B19204A	4		Visual effects instance map	Other
+1B25A024	4		Sound properties	Audio
+1C12D458	4	XML	Tag categories metadata tuning	Tuning
+1C1CF1F7	4		Railing	Build
+1C99B344	4		Animation boundary condition cache	Animation
+1CC04273	4		World map	World
+1D6DF1CF	4		Column	Build
+1F886EAD	3M	_INI	INI file	
+20D81496	4		World manifest reference	World
+220557DA	3M	STBL	String table	
+220557DA	4		String table	UI
+2451C101	4	XML	Achievement category tuning	Tuning
+25796DCA	4		OpenType font	UI
+2653E3C8	3M	THUM	Thumbnail	
+2653E3C9	3M	THUM	Thumbnail	
+2653E3CA	3M	THUM	Thumbnail	
+26978421	4		Cursor	UI
+26AF8338	4		Pelt layer	Create-A-Sim
+276CA4B9	4		TrueType font	UI
+27C01D95	4		Walk style	Create-A-Sim
+28B64675	4	XML	Aspiration tuning	Tuning
+2A8A5E22	4		Tray item	Lot
+2AD195F2	3M		Unknown	
+2AD195F2	4		Terrain height map	World
+2BC04EDF	4		LRLE image	Create-A-Sim
+2C01BC15	4	XML	Renderer global highlight settings	Tuning
+2C70ADF8	4	XML	Career level tuning	Tuning
+2D277213	4		Sync point schema	Animation
+2D4284F0	3M	THUM	Thumbnail	
+2D4284F1	3M	THUM	Thumbnail	
+2D4284F2	3M	THUM	Thumbnail	
+2E47A104	4	XML	Social group tuning	Tuning
+2E75C764	3M	ICON	Object thumbnail (small)	
+2E75C765	3M	ICON	Object thumbnail (medium)	
+2E75C766	3M	ICON	Object thumbnail (large)	
+2E75C767	3M	ICON	Object thumbnail (very large)	
+2F334E48	4	XML	Achievement reward tuning	Tuning
+2F7D0002	3M	IMAG	UI image (TGA)	
+2F7D0004	3M	IMAG	UI image (PNG)	
+2F7D0004	4		PNG image	Build
+2F7D0008	3M	UITX	UV map texture	
+2FAE983E	4		Foundation	Build
+312E7545	3M	UNKN	Walls	
+316C78F2	3M	CFND	Catalog foundation	
+319E4F1D	3M	OBJD	Object definition	
+319E4F1D	4		Object catalog	Build
+32C83095	3M		Thumbnail validation	
+339BC5BD	4	XML	Statistic tuning	Tuning
+342778A7	3M		Face overlays, tints and makeup	
+342779A7	3M		Unknown	
+3453CF95	4		RLE2 image	Create-A-Sim
+346CB93E	4		Tuning dependencies cache	Tuning
+34E5247C	3M	UNKN	Unknown	
+35A33E29	3M		World description hash	
+376840D7	4		AVI video	Audio
+37B999F1	4	XML	Renderer global shadow settings	Tuning
+37EF2EE7	4	XML	Royalty tuning	Tuning
+3924DE26	4		Blueprint	Lot
+3A1E944E	4		Path	Other
+3A65AF29	3M	MINF	Makeup information	
+3BD45407	4		Sim household thumbnail	Household
+3BF8FD86	4		World lot parameter info	World
+3C1AF1F2	4		CAS part thumbnail	Create-A-Sim
+3C2A8647	4		Buy/build thumbnail	Build
+3D8632D0	3M		World terrain paint	
+3D8632D0	4		Terrain blend map	World
+3EAAA87C	4	BNDL	Bundle container	Inferred from content
+3F0C529A	4		Spandrel	Build
+3F163505	4	XML	Slot type set tuning	Tuning
+3FD6243E	4	XML	Walk-by tuning	Tuning
+4115F9D5	4		Sound mix properties	Audio
+45061106	4		Lot footprint reference	World
+457FC032	4	XML	Renderer censor tuning	Tuning
+47FDDFBC	4		Water mask	World
+48C28979	4		Spawner	World
+48C2D5ED	4	XML	Template chooser tuning	Tuning
+48C75CE3	4	XML	Career track tuning	Tuning
+49395302	4	XML	Tag set tuning	Tuning
+4D1A5589	3M	OBJN	Object instances	
+4DB8251E	4	XML	Renderer global DOF settings	Tuning
+4E71B4E6	4		Queryable world mask manifest	World
+4F09F8E1	3M	UNKN	Unknown	
+4F726BBE	4		World landing strip	World
+4F739CEE	4	XML	Test-based score tuning	Tuning
+5003333C	4		Pond	Build
+51077643	4	XML	Static commodity tuning	Tuning
+515CA4CD	3M	CWAL	Catalog wall or floor pattern	
+54372472	3M	TSNP	Travel world Sim snapshot	
+545AC67A	4		SimData	Other
+54BD4618	4	XML	Automation tuning	Tuning
+598F28E7	4	XML	Situation goal tuning	Tuning
+5B02819E	4	XML	Object state tuning	Tuning
+5B282D45	4		Body part thumbnail	Create-A-Sim
+5BE29703	4		World visual effects info	World
+5DE9DBA0	3M	THUM	Thumbnail	
+5DE9DBA1	3M	THUM	Thumbnail	
+5DE9DBA2	3M	THUM	Thumbnail	
+6017E896	4	XML	Buff tuning	Tuning
+6224C9D6	4	XML	Strategy tuning	Tuning
+626F60CC	3M	THUM	Thumbnail	
+626F60CD	3M	THUM	Thumbnail	
+626F60CE	3M	THUM	Thumbnail	
+628A788F	3M		Active household information	
+62E94D38	4		Combined binary tuning	Tuning
+62ECC59A	4		Scaleform GFX	UI
+63A33EA7	3M	ANIM	Scenegraph animation	
+656322B7	4		World camera mesh reference	World
+669499DC	4		Credits	UI
+69A5DAA4	4	XML	Slot type tuning	Tuning
+6ABFAD26	3M	UNKN	Unknown	
+6B20C4F3	3M	CLIP	Animation clip	
+6B20C4F3	4		Animation clip	Animation
+6B6D837D	3M	SNAP	Family picture (small)	
+6B6D837E	3M	SNAP	Family picture (medium)	
+6B6D837F	3M	SNAP	Family picture (large)	
+6DFF1A66	4		MTX catalog	Other
+6E0DDA9F	4	XML	Sim filter tuning	Tuning
+6F40796A	4		World road polygons	World
+6FA49828	4	XML	Reward tuning	Tuning
+7147A350	4	XML	Object part tuning	Tuning
+71A449C9	4		Sky box texture data	World
+71BDB8A2	4		Styled look	Create-A-Sim
+72683C15	3M	STPR	Skin tone preset	
+729F6C4F	4		Household description	World
+736884F1	3M	VPXY	Visual proxy	
+738E6C56	4	XML	Topic tuning	Tuning
+73996BEB	4	XML	Career tuning	Tuning
+73CB32C2	4		Voice effect	Audio
+73E93EEB	3M	_XML	Package manifest	
+74050B1F	4		Magazine collection	Other
+7672F0C5	3M		Package dependency information	
+76BCF80C	4		Trim	Build
+78559E9E	4	XML	Achievement tuning	Tuning
+78C8BCE4	4		World manifest	World
+7DF2169C	4	XML	Snippet tuning	Tuning
+800A3690	4	XML	CAS lighting tuning	Tuning
+8070223D	3M	AUDT	Audio tuners	
+810A102D	4		World data	World
+81CA1A10	4		Cutout info table	Other
+82B43584	3M		Checksum	
+84C23219	4		Floor trim	Build
+86136AA5	4	XML	Renderer global light settings	Tuning
+892C4B8A	4		World camera info	World
+893E429C	4	XML	Tags trait group metadata tuning	Tuning
+8B18FF6E	4		Sim hotspot control	Other
+8E71065D	4		Pet breed coat pattern thumbnail	Create-A-Sim
+8EAF13DE	3M	_RIG	Rig	
+8EAF13DE	4		Rig	Animation
+8FB3E0B1	4	XML	Tutorial tip tuning	Tuning
+8FFB80F6	3M	_ADS	DDS image	
+90620000	3M		Unknown	
+90624C1B	3M		Unknown	
+90624C1B	4		Terrain size info	World
+9063660D	3M	WTXT	World texture map	
+9063660D	4		Terrain data	World
+9063660E	3M		Road intersections and curves	
+9063660E	4		Road definition	World
+913381F2	3M	UNKN	Unknown	
+9151E6BC	3M	CWST	Catalog wall	
+9151E6BC	4		Half wall	Build
+91568FD8	4		World lot objects	World
+91EDBD3E	3M	CRST	Catalog roof style	
+91EDBD3E	4		Roof	Build
+94C5D14A	3M	SIGR	Signature	
+94EC4B54	3M	UNKN	Unknown	
+96B0BD17	4		World colour timeline map	World
+9917EACD	4		Modular piece	Build
+99C07284	4		Platform	Build
+99CBC754	4	XML	Native build/buy tuning	Tuning
+99D98089	4		UI event mode mapping	UI
+9A20CD1C	4		Stairs	Build
+9AFE47F5	4		Locomotion config	Animation
+9C07855F	4	XML	Situation job tuning	Tuning
+9C925813	4		Sim preset thumbnail	Create-A-Sim
+9CC21262	4	XML	Service NPC tuning	Tuning
+9D1AB874	4		Sculpt	Create-A-Sim
+9D7E7558	4		Pelt brush	Create-A-Sim
+9DB989FD	4	XML	Tags metadata tuning	Tuning
+9DDB5FDA	4	XML	Sim lighting tuning	Tuning
+9DF2F1F2	4	XML	Situation goal set tuning	Tuning
+9F5CFF10	4		Style	Other
+A0451CBD	4		Modular piece catalog	Build
+A057811C	4		Frieze	Build
+A1FF2FC4	4		World map lot thumbnail	World
+A2377025	3M		Unknown	
+A4BA8645	4		Water mask list	World
+A576C2E7	4		Sound modifier mapping	Audio
+A5DFFCF3	4		Pool trim	Build
+A5F9FE18	3M	UNKN	Social routing template	
+A680EA4B	4		World description	World
+A7815676	4		Colour list	Create-A-Sim
+A8D58BE5	3M	SKIL	Skill data	
+A8F7B517	4		Window set	Other
+AB19BCBA	4		Plex unit mask thumbnail	World
+AC03A936	4		Generic MTX	Other
+AC16FBEC	4		Region map	Create-A-Sim
+AD6FDF1F	4	XML	Posture tuning	Tuning
+AE39399F	3M		World geometry	
+AE39399F	4		Terrain mesh	World
+AEE860E4	4		Colour blended terrain	World
+AFADAC48	4	XML	Away action tuning	Tuning
+B0118C15	4		Thumbnail extra 2	Other
+B0311D0F	4		Roof trim	Build
+B074ACE6	3M		Unknown	
+B125533A	3M	UNKN	Unknown	
+B1422971	3M	UNKN	Unknown	
+B1CC1AF6	3M	_VID	Video	
+B3C438F0	4		Household template	Household
+B4DD716B	3M	_INV	Inventory	
+B4F762C9	4		Floor	Build
+B52F5055	3M	FBLN	Facial blend unit	
+B61DE6B4	4	XML	Object tuning	Tuning
+B67673A2	4		Pet face preset thumbnail	Create-A-Sim
+B6C8B6A0	4		DDS image (overlay)	Texture
+B734E44F	4		World off-lot mesh	World
+B7FF8F95	4	XML	Subroot tuning	Tuning
+B8444447	4		Empty marker resource	Inferred from content
+B91E18DB	4		Magalog	Build
+B93A9915	4		Thumbnail cache	Other
+BA7B60B8	4	XML	Mood tuning	Tuning
+BA856C78	4		RLES image	Create-A-Sim
+BC4A5044	4		Clip header	Animation
+BC80ED59	4		World data (unknown 5)	World
+BD491726	4		Plex thumbnail	World
+BDD82221	4		UI control event map	UI
+C020FCAD	4	XML	Aspiration track tuning	Tuning
+C0DB5AE7	4		Object definition	Build
+C202C770	4		Music data	Audio
+C2CAA646	4	XML	Telemetry tuning	Tuning
+C4DFAE6D	4		Pet coat pattern	Create-A-Sim
+C582D2FB	4		Voice plugin	Audio
+C5F6763E	4		Sim modifier	Other
+C71CA490	4		Hash index table	Inferred from content
+CB5FDDC7	4	XML	Trait tuning	Tuning
+CC09004D	4		Ladder	Build
+CD9DE247	4		Sim featured outfit thumbnail	Create-A-Sim
+CF84EC98	3M		State machine saved state	
+CF9A4ACE	3M	MDLR	Modular object	
+D04FA861	4		World conditional data	World
+D063545B	3M	LDES	Lot file	
+D2DC5BAD	4		Ambience	Audio
+D3044521	3M	RSLT	Slot definition	
+D3044521	4		Slot	Other
+D33C281E	4		Blueprint image	Lot
+D382BF57	3M	FTPT	Footprint	
+D382BF57	4		Footprint	Build
+D4D9FBE5	3M	PTRN	Pattern list	
+D5F0F921	4		Wall	Build
+D65DAFF9	4		Region description	World
+D70DD79E	4	XML	HSV tweaker settings	Tuning
+D83892B7	4	XML	Thumbnail tuning	Tuning
+D84E7FC5	3M	ICON	Lot image (small)	
+D84E7FC6	3M	ICON	Lot image (medium)	
+D84E7FC7	3M	ICON	Lot image (large)	
+D8800D66	4	XML	Lot tuning	Tuning
+D99F5E5C	4		Empty marker resource	Inferred from content
+D9BD0909	3M		World description name	
+DB43E069	4		Deformer map	Other
+DC37E964	3M		Text resource	
+DD057DCC	4	XML	Tag tuning	Tuning
+DD3223A7	3M	BUFF	Buff data	
+DE6AD3CF	4	XML	Video global tuning	Tuning
+DEA2951C	3M	PETB	Pet breed	
+DEBAFB73	4	XML	Broadcaster tuning	Tuning
+E04A24A3	4	XML	Tutorial tuning	Tuning
+E06AE65E	4	XML	Renderer global vol light scattering settings	Tuning
+E0D75679	4	XML	Build/buy tuning	Tuning
+E0ED7129	4		World spawner info	World
+E1477E18	4	XML	Game ruleset tuning	Tuning
+E2249422	4		Animation constraint cache	Animation
+E231B3D8	4		Object modifiers	Other
+E24B5287	4	XML	CAS tuning	Tuning
+E350DBD8	4	XML	Aspiration category tuning	Tuning
+E55EEACB	4	XML	Video playlist tuning	Tuning
+E6BBD7DE	4	XML	Venue tuning	Tuning
+E7ADA79D	4		Fountain trim	Build
+E882D22F	4	XML	Interaction tuning	Tuning
+EA5118B0	3M	_SWB	Visual effects	
+EA5118B0	4		Visual effects merged	Other
+EAA32ADD	4		CAS preset	Create-A-Sim
+EB97F823	4	XML	Recipe tuning	Tuning
+EBCBB16C	4		Terrain paint	Build
+EC6A8FC6	4	XML	Balloon tuning	Tuning
+EE17C6AD	4	XML	Animation tuning	Tuning
+EF59C586	4	XML	Career situation tuning	Tuning
+F0633989	3M		Unknown	
+F0633989	4		World file header	World
+F0FF5598	3M	CAM	Camera preset	
+F12E5E12	3M	UNKN	Unknown	
+F1EDBD86	3M	CRMT	Catalog roof pattern	
+F1EDBD86	4		Roof pattern	Build
+F3A38370	3M	NGMP	Name hash to GUID map	
+F3ABFF3C	4	XML	CAS modifier tuning	Tuning
+F609FD60	3M		World package	
+F93B40CF	4	XML	Renderer global SSAO settings	Tuning
+FA25B7DE	4		World pipeline data	World
+FB0DD002	4		World camera mesh	World
+FBC3AEEB	4	XML	Situation tuning	Tuning
+FCB1A1E4	4		World object data	World
+FCEAB65B	3M	THUM	Colour swatch thumbnail	
+FD04E3BE	4		Audio configuration	Audio
+FD57A8D7	4		Colour timeline data	World
+FE33068E	4		Wall trim	Build
+FF56010C	4		Object catalog set	Build

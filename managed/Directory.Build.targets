@@ -1,0 +1,30 @@
+<Project>
+  <!--
+    Windows icon for every .exe built from these projects (building only; nothing changes at run time).
+    The icon comes from DBPFX.Identity.dll, built with the native engine and copied by build.ps1 into
+    $(DbpfxNativeDir) together with dbpfx-iconstamp.exe. <AssemblyName>.exe gets the icon of the
+    release channel ($(DbpfxChannel)).
+    Microsoft's signed executables (obj\...\apphost.exe, testhost.exe) are left untouched so their
+    signatures stay valid.
+  -->
+  <PropertyGroup>
+    <DbpfxIconStamp>$(DbpfxNativeDir)dbpfx-iconstamp.exe</DbpfxIconStamp>
+    <DbpfxIdentityLibrary>$(DbpfxNativeDir)DBPFX.Identity.dll</DbpfxIdentityLibrary>
+  </PropertyGroup>
+
+  <Target Name="DbpfxCheckChannel" BeforeTargets="Build" Condition="'$(DbpfxChannel)' == ''">
+    <Error Text="Unknown pre-release tag in version '$(Version)': use X.X.X-canary, X.X.X-dev, X.X.X-beta or X.X.X." />
+  </Target>
+
+  <Target Name="DbpfxSetIcon" AfterTargets="Build"
+          Condition="'$(OS)' == 'Windows_NT' and ('$(OutputType)' == 'Exe' or '$(OutputType)' == 'WinExe')">
+    <PropertyGroup>
+      <_DbpfxCanStamp Condition="Exists('$(DbpfxIconStamp)') and Exists('$(DbpfxIdentityLibrary)')">true</_DbpfxCanStamp>
+      <_DbpfxOwnExe>$(TargetDir)$(AssemblyName).exe</_DbpfxOwnExe>
+    </PropertyGroup>
+    <Warning Condition="'$(_DbpfxCanStamp)' != 'true'"
+             Text="Executable icon skipped: $(DbpfxIdentityLibrary) or $(DbpfxIconStamp) is missing (run build.ps1 first)." />
+    <Exec Condition="'$(_DbpfxCanStamp)' == 'true' and Exists('$(_DbpfxOwnExe)')" StandardOutputImportance="low"
+          Command="&quot;$(DbpfxIconStamp)&quot; &quot;$(DbpfxIdentityLibrary)&quot; $(DbpfxChannel) &quot;$(_DbpfxOwnExe)&quot;" />
+  </Target>
+</Project>

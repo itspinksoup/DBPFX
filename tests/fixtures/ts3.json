@@ -1,0 +1,41 @@
+{
+ "game": "sims3",
+ "resources": [
+  {
+   "key": "220557DA-00000000-0017A2C3F2E55B21",
+   "size": 101,
+   "sha256": "94b93e1e1134689a080d75679ff518f027b90ed2a8dddf5f052902a91bef7134",
+   "mode": "refpack"
+  },
+  {
+   "key": "0166038C-00000000-0000000000001000",
+   "size": 50,
+   "sha256": "8e177e89e5b82ebb8aa2f5c2a1c1c1d75df2b550e74a8d4a200d92ae8ca7c30b",
+   "mode": "raw"
+  },
+  {
+   "key": "073FAA07-00000000-5C9A1E73B2D4F001",
+   "size": 25995,
+   "sha256": "0b7d8a908dc4b41bac25480baabaaa9f19467aef8dc0333faa6f68a96ba7ad89",
+   "mode": "refpack"
+  },
+  {
+   "key": "00B2D882-00000001-00000000000000AA",
+   "size": 3000,
+   "sha256": "77bf379b40c7b985c0d06a46889f8df4106ff4a70b26d2cff23316b8d3bf3567",
+   "mode": "raw"
+  },
+  {
+   "key": "0333406C-00000001-8000000000000001",
+   "size": 9724,
+   "sha256": "8a321b81557decd53d41dac1e7630d9315ba8b7f4e2999f04325688b1778dc28",
+   "mode": "refpack"
+  },
+  {
+   "key": "0333406C-00000002-8000000000000002",
+   "size": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "mode": "raw"
+  }
+ ]
+}

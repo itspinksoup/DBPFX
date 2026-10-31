@@ -1,0 +1,24 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- Pre-release: keep in sync with DBPFX_VERSION_SUFFIX in native/CMakeLists.txt -->
+    <Version>0.1.0-canary</Version>
+    <Product>DBPFX</Product>
+    <Description>Memory-mapped DBPF package engine for The Sims 3, The Sims Medieval and The Sims 4</Description>
+    <!-- Where build.ps1 / build.sh put the native engine (DBPFX.Native.dll / libDBPFX.Native.so) -->
+    <DbpfxNativeDir Condition="'$(DbpfxNativeDir)' == ''">$(MSBuildThisFileDirectory)..\artifacts\native\</DbpfxNativeDir>
+  </PropertyGroup>
+
+  <!-- Release channel from the pre-release tag of $(Version): X.X.X-canary, X.X.X-dev, X.X.X-beta or X.X.X (stable).
+       It selects the icon group of DBPFX.Identity.dll given to every .exe (see Directory.Build.targets). -->
+  <PropertyGroup>
+    <DbpfxPreRelease>$([System.Text.RegularExpressions.Regex]::Replace('$(Version)', '^[^-]*-?([A-Za-z]*).*$', '$1').ToLowerInvariant())</DbpfxPreRelease>
+    <DbpfxChannel Condition="'$(DbpfxPreRelease)' == ''">STABLE</DbpfxChannel>
+    <DbpfxChannel Condition="'$(DbpfxPreRelease)' == 'canary'">CANARY</DbpfxChannel>
+    <DbpfxChannel Condition="'$(DbpfxPreRelease)' == 'dev'">DEVELOPER</DbpfxChannel>
+    <DbpfxChannel Condition="'$(DbpfxPreRelease)' == 'beta'">BETA</DbpfxChannel>
+  </PropertyGroup>
+</Project>

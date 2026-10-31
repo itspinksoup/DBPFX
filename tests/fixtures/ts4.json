@@ -1,0 +1,29 @@
+{
+ "game": "sims4",
+ "resources": [
+  {
+   "key": "220557DA-80000000-00F7A2C3F2E55B21",
+   "size": 60,
+   "sha256": "9915767ccfa6a4b190b404e83cb72e98fea28af38183df76dda293156c3f4dca",
+   "mode": "zlib"
+  },
+  {
+   "key": "545AC67A-80000000-00F7A2C3F2E55B22",
+   "size": 19333,
+   "sha256": "e5bb4f8694678747ac35e596fba7c62fdcb92732916bd5beb151ff98dd1a599f",
+   "mode": "zlib"
+  },
+  {
+   "key": "62E94D38-80000000-00F7A2C3F2E55B23",
+   "size": 5145,
+   "sha256": "45b49667687c368774e8f653f3517d06b939b9fc35bbdb9c64d847d3d158bbbb",
+   "mode": "refpack"
+  },
+  {
+   "key": "00B2D882-80000000-00F7A2C3F2E55B24",
+   "size": 2000,
+   "sha256": "4255f28eb0affb9e7827139cf4e62026c3c4b62c8623f79fed6854929aae344d",
+   "mode": "raw"
+  }
+ ]
+}
