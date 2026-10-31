@@ -42,6 +42,7 @@ on top for the C# bindings:
 * Compressed resources are decoded into pooled buffers (`ArrayPool<byte>`).
 * Untouched resources go from the map to the output byte-for-byte. They are *never* decompressed or re-encoded.
 
+### Benchmark
 It was measured on a generated 60,000-resource list from a 123 MB package file (`native/tools/bench.cpp`) against
 the conventional readers like **s3pi** and **s4pi**:
 
@@ -55,7 +56,7 @@ Reading was limited by `zlib` in both cases.
   
 ## Documentation
 Usage information and resources are slightly being added to this repository. This section will be provided with multiple useful 
-links and proper benchmark tests so users can decide if they want to use these tools as alternative to the traditional ones that
+links so users can decide if they want to use these tools as alternative to the traditional ones that
 are already present.
 
 ## Building
