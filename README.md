@@ -3,8 +3,10 @@
     <img width="128" height="128" alt="DBPFX" src="https://github.com/user-attachments/assets/2298a110-0fde-4337-9d77-cb8a8f2e2a12" />
   </picture>
 </p>
+<p align="center">
+  <h1 align="center">DBPFX</h1>
+</p>
 
-# DBPFX
 A modern implementation of the DBPF Package libs from **The Sims™ 3**, **The Sims™ Medieval** and **The Sims™ 4**.
 Planned support for legacy games and compatible console titles might arrive in the future.
 
