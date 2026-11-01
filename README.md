@@ -11,7 +11,7 @@ A modern implementation of the DBPF Package libs from **The Sims™ 3**, **The S
 Planned support for legacy games and compatible console titles might arrive in the future.
 
 It's a brand new engine that reads and writes the packages of all three games and converts resource data between them.
-It has been produced with artificial intelligence asistance from multiple LLMs like *Claude Cowork* and *Codex* by *OpenAI*.
+It has been produced with artificial intelligence assistance from multiple LLMs like *Claude Cowork* and *Codex* by *OpenAI*.
 
 This project isn't affiliated with/endorsed by The Sims™, Maxis or Electronic Arts™. Trademarks are property of their respective owners.
 
