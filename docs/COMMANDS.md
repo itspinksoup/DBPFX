@@ -494,11 +494,3 @@ Times opening a package, looking resources up by key (2000 by default) and readi
 ```powershell
 & "C:\path\to\DBPFX\build\native\dbpfx-bench.exe" FullBuild0.package 10000
 ```
-
-### dbpfx-iconstamp
-
-```
-dbpfx-iconstamp <DBPFX.Identity.dll> <STABLE|BETA|CANARY|DEVELOPER> <file.exe> [more.exe ...]
-```
-
-Windows only. Copies one icon group out of `DBPFX.Identity.dll` into executables, replacing their existing icons. The build uses it to give every DBPFX executable the icon of the current release channel. Do not use it on signed executables: changing their resources breaks the signature.
